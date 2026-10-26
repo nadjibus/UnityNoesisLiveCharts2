@@ -1,0 +1,8 @@
+<linker>
+    <assembly fullname="LiveChartsCore" preserve="all" />
+    <assembly fullname="LiveChartsCore.Noesis" preserve="all" />
+    <assembly fullname="Assembly-CSharp">
+        <type fullname="ChartsExample.DashboardViewModel" preserve="all" />
+        <type fullname="ChartsExample.RelayCommand" preserve="all" />
+    </assembly>
+</linker>

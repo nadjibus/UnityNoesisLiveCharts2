@@ -1,0 +1,8 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="Dashboard.Brush.Page" Color="#101827" />
+    <SolidColorBrush x:Key="Dashboard.Brush.Card" Color="#192437" />
+    <SolidColorBrush x:Key="Dashboard.Brush.Text" Color="#EEF4FF" />
+    <SolidColorBrush x:Key="Dashboard.Brush.Muted" Color="#98ABC4" />
+    <SolidColorBrush x:Key="Dashboard.Brush.Border" Color="#2B3D55" />
+    <SolidColorBrush x:Key="Dashboard.Brush.Button" Color="#263955" />
+</ResourceDictionary>

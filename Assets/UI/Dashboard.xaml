@@ -1,0 +1,110 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lvc="clr-namespace:LiveChartsCore.Noesis;assembly=LiveChartsCore.Noesis">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Palette.Dark.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="ActionButton" TargetType="Button">
+                <Setter Property="Foreground" Value="{DynamicResource Dashboard.Brush.Text}" />
+                <Setter Property="Background" Value="{DynamicResource Dashboard.Brush.Button}" />
+                <Setter Property="Padding" Value="20,13" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="FontSize" Value="17" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Face" Background="{TemplateBinding Background}" CornerRadius="8"
+                                BorderBrush="{DynamicResource Dashboard.Brush.Border}" BorderThickness="1" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Face" Property="BorderBrush" Value="#549EFF" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Face" Property="Opacity" Value="0.7" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="CardStyle" TargetType="Border">
+                <Setter Property="Background" Value="{DynamicResource Dashboard.Brush.Card}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource Dashboard.Brush.Border}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="24" />
+                <Setter Property="Margin" Value="8" />
+            </Style>
+            <Style x:Key="Title" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{DynamicResource Dashboard.Brush.Text}" />
+                <Setter Property="FontSize" Value="21" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Margin" Value="0,0,0,8" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border Background="{DynamicResource Dashboard.Brush.Page}">
+        <Viewbox Stretch="Uniform">
+            <Grid Width="1920" Height="1080" Margin="32">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="38" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.ColumnSpan="3" Margin="8,0,8,16">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="LiveCharts2 + Noesis" Foreground="{DynamicResource Dashboard.Brush.Text}" FontSize="36" FontWeight="Bold" />
+                        <TextBlock Text="Five charts. One view model. Native Noesis rendering." Foreground="{DynamicResource Dashboard.Brush.Muted}" FontSize="18" Margin="0,8,0,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Content="{Binding LiveLabel}" Command="{Binding ToggleLiveCommand}" Style="{StaticResource ActionButton}" />
+                        <Button Content="↻  Randomize data" Command="{Binding RandomizeCommand}" Style="{StaticResource ActionButton}" />
+                        <Button Content="{Binding ThemeLabel}" Command="{Binding ToggleThemeCommand}" Style="{StaticResource ActionButton}" />
+                    </StackPanel>
+                </Grid>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource CardStyle}">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Line · traffic over time" Style="{StaticResource Title}" />
+                        <lvc:CartesianChart Series="{Binding LineSeries}" IsDarkMode="{Binding IsDark}" LegendPosition="Bottom" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Pie · platform share" Style="{StaticResource Title}" />
+                        <lvc:PieChart Series="{Binding PieSeries}" IsDarkMode="{Binding IsDark}" LegendPosition="Bottom" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Column · weekly activity" Style="{StaticResource Title}" />
+                        <lvc:CartesianChart Series="{Binding ColumnSeries}" IsDarkMode="{Binding IsDark}" LegendPosition="Bottom" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource CardStyle}">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Area · throughput" Style="{StaticResource Title}" />
+                        <lvc:CartesianChart Series="{Binding AreaSeries}" IsDarkMode="{Binding IsDark}" LegendPosition="Bottom" />
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Doughnut · device mix" Style="{StaticResource Title}" />
+                        <lvc:PieChart Series="{Binding DoughnutSeries}" IsDarkMode="{Binding IsDark}" LegendPosition="Bottom" />
+                    </DockPanel>
+                </Border>
+                <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="Live data refreshes every 3 seconds. Hover a chart to inspect values." Foreground="{DynamicResource Dashboard.Brush.Muted}" VerticalAlignment="Center" Margin="8,0" FontSize="16" />
+                <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding UpdateLabel}" Foreground="{DynamicResource Dashboard.Brush.Muted}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="8,0" FontSize="16" />
+            </Grid>
+        </Viewbox>
+    </Border>
+</UserControl>
